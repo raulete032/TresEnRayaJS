@@ -1,0 +1,36 @@
+
+body, html{
+    height: 100%;
+    width: 100%;
+}
+
+
+.container{
+    border: 1px solid black;
+    height: 90%;
+    width: 40%;
+}
+
+.row{
+    height: 100%;
+}
+
+#playZone{
+    border-right: 1px solid black;
+}
+
+#controlZone{
+    border-left: 1px solid black;
+}
+
+#marcador{
+    border: 1px solid black;
+    height: 10%;
+}
+
+#nextPiece{
+    border: 1px solid black;
+    width: 40%;
+    height: 10%;
+    margin-left: 30%;
+}
