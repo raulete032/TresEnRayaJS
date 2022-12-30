@@ -2,7 +2,7 @@
 
 
 
-.container{
+#contenedorTablero{
     width: 300px;
     height: 300px;
     margin-top: 10% !important;
@@ -15,7 +15,6 @@
 
 .col-4{
     border: 1px solid black;
-    display: flex !important;
     width: 33.3333333%;
     height: 33.333333%;
 }

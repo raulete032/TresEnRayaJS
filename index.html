@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon">
     <title>Tetrix</title>
 
     <!-- Boostrap -->
@@ -16,10 +17,10 @@
 </head>
 <body>    
 
-    <div class="container">
+    <div id="contenedorTablero" class="container">
         <div id="tablero" class="row">
             <div class="col-4">
-                hola
+                
             </div>
             <div class="col-4">
                 
@@ -31,9 +32,10 @@
             <div class="col-4"></div>
             <div class="col-4"></div>
             <div class="col-4"></div>
-        </div>        
+        </div>
     </div>
 
+    <div class="container">
         <div class="row">
             <div class="col-6 text-center">
                 <p>Jugador 1 <img src="./img/circulo.png" alt=""></p>
@@ -45,8 +47,24 @@
             </div>
         </div>
 
+        <div class="row justify-content-center">
+            <div class="col-6 text-center">
+                <h1>Lanzar moneda</h1>
+            </div>            
+        </div>
+
+        <div class="row justify-content-center">           
+            <div class="col-6 text-center">
+                <button class="btn btn-primary">Lanzar moneda</button>
+            </div>
+        </div>
+    </div>
 
 
 
+        <script src="./js/generales.js"></script>
+        <script src="./js/classes/ficha.js"></script>        
+        <script src="./js/index.js"></script>
+        <script src="./js/addEvent.js"></script>
 </body>
 </html>
