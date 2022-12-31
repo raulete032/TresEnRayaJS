@@ -51,6 +51,11 @@ p > img{
     text-align: center;
 }
 
+#turno{
+    text-align: center;
+    font-size: 18px;
+}
+
 @keyframes giraMoneda {
     0%{
         transform: rotateX(0deg);
