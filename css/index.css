@@ -41,10 +41,14 @@ p > img{
 
 .mcruz{
     animation-duration: .2s;
-    animation-delay: .2s;
     animation-fill-mode: forwards;
     animation-iteration-count: infinite;
 
+}
+
+#errorLanzaMoneda{
+    color: red;
+    text-align: center;
 }
 
 @keyframes giraMoneda {

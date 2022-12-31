@@ -18,44 +18,79 @@ function colocaFicha(){
 }
 
 
+
 /**
  * Se pulsa el botoón lanzar moneda
  */
 var swMoneda=true;
 function lanzarMoneda(){
+    document.getElementById('errorLanzaMoneda').innerHTML= "";
+    let eleccion= eleccionF();
 
-    document.getElementById('btnLanzarMoneda').disabled=true;
-    let vueltas= Math.round(Math.random()*10)+10;
-    
-    //Cada 200 milisegundos (0.2 segundos)
-    let giros= setInterval(() => {
-
+    if(eleccion){
+        document.getElementById('btnLanzarMoneda').disabled=true;
         let moneda= document.getElementById('moneda');
-        if(swMoneda){
+        moneda.style.animationFillMode= 'forwards';
+        moneda.style.animationIterationCount= 'infinite';
+    
+        let result= Math.round(Math.random());
+        lanzamiento(0, result);   
+    }
+    else{
+        document.getElementById('errorLanzaMoneda').innerHTML= "Elige entre cara o cruz";
+    }
+    
+}
+
+
+function eleccionF(){
+    
+    
+
+
+
+
+
+}
+
+
+function lanzamiento(x, solu) {
+
+    let moneda= document.getElementById('moneda');
+    if (x < 10) {
+        
+        if(x%2==0){
             moneda.src='./img/mcara.png';
-            moneda.style.transform='rotateX(90deg)';
             moneda.className='mcara';
         }
         else{
             moneda.src='./img/mcruz.png';
-            moneda.style.transform='rotateX(90deg)';
             moneda.className='mcruz';
-        }
-        swMoneda=!swMoneda;
-        
-    }, 2000);
-
-    setTimeout(() => {
-        clearInterval(giros);
-    }, 10000);
-    
-    if(vueltas%2==0){
-
-    }    
-    else{
-
+        }  
+        setTimeout(() => lanzamiento((x+1), solu), 200);
     }
-}
+    else{
+        moneda.style.animationFillMode= 'backwards';
+        moneda.style.animationIterationCount= 'initial';
+        
+        if(solu==1)
+            moneda.src= './img/mcara.png';
+        else
+            moneda.src= './img/mcruz.png';
+
+        finMoneda();
+    }
+  }
+
+
+  function finMoneda(){
+
+    let moneda= document.getElementById('moneda');
+        moneda
+
+
+  }
+
 
 
 
