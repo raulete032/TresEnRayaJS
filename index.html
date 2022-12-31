@@ -54,8 +54,27 @@
         </div>
 
         <div class="row justify-content-center">           
+            <div class="col-7 text-center">
+                <button id="btnLanzarMoneda" class="btn btn-primary">Lanzar moneda</button>
+            </div>
             <div class="col-6 text-center">
-                <button class="btn btn-primary">Lanzar moneda</button>
+                <p>Jugador 1</p>
+                <label for="player1Cara">Cara</label>
+                <input type="radio" name="player1" id="player1Cara">
+                <label for="player1Cruz">Cruz</label>
+                <input type="radio" name="player1" id="player1Cruz">
+            </div>
+            <div class="col-6 text-center">
+                <p>Jugador 2</p>
+                <label for="player2Cara">Cara</label>
+                <input type="radio" name="player2" id="player2Cara">
+                <label for="player2Cruz">Cruz</label>
+                <input type="radio" name="player2" id="player2Cruz">
+            </div>
+
+            <div id="divMoneda" class="col-6 align-self-center text-center">
+                <img class="mcara" src="./img/mcara.png">
+                <img class="mcruz"  src="./img/mcruz.png">
             </div>
         </div>
     </div>
