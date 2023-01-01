@@ -14,11 +14,11 @@ function colocaFicha(){
     if(jugar){ //se está jugando
         let img= creaNodo("img");
         if(turno){
-            img.src='../img/circulo.png';
+            img.src='./img/circulo.png';
             img.className='circulo';
         }            
         else{
-            img.src='../img/cruz.png';
+            img.src='./img/cruz.png';
             img.className='cruz';
         }
         if(div.childNodes.length==0){
