@@ -22,15 +22,20 @@ function colocaFicha(){
         else{
             img.src='../img/cruz.png';
             img.className='cruz';
-        }            
-        div.appendChild(img);        
+        }
+        if(div.childNodes.length==0){
+            div.appendChild(img);            
+            let fin= compruebaGanar(div);
+            tituloTurno();
+            if(fin)
+                reiniciaJugo();
+        }
+                    
     }
     else{
         document.getElementById('errorLanzaMoneda').innerHTML= "Lanza la moneda para saber quien empieza";
     }
-    tituloTurno();
-
-    compruebaGanar();
+    
 }
 
 
@@ -41,9 +46,11 @@ function colocaFicha(){
 var swMoneda=true;
 function lanzarMoneda(){
     document.getElementById('errorLanzaMoneda').innerHTML= "";
+    document.getElementById('ganador').innerHTML="";
     let eleccion= eleccionF();
 
     if(eleccion){
+        borraFichas();
         document.getElementById('btnLanzarMoneda').disabled=true;
         document.getElementById('player1Cara').disabled=true;
         document.getElementById('player1Cruz').disabled=true;
@@ -181,24 +188,220 @@ function lanzamiento(x, solu) {
   /**
    * Función que comprueba si se ha ganado
    */
-  function compruebaGanar(){
+  function compruebaGanar(div){
 
-    let divsTablero= document.querySelectorAll('#tablero div');
+    let id= div.id;
 
+    let comp1;
+    let comp2;
+    let comp3;
     let ganador=false;
-
-    if(turno){ //es turno del jugador1
-
-        
-    }
-    else if(!turno){ //es turno dle jugador2
-
-
-
-
+    switch(id){
+        case "1-1": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    comp3= compruebaDiagonalPrincipal(id);
+                    if(comp1 || comp2 || comp3)
+                        ganador= true;
+            break;
+        case "1-2": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    if(comp1 || comp2)
+                        ganador= true;
+            break;
+        case "1-3": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    comp3= compruebaDiagonalSecundaria(id);
+                    if(comp1 || comp2 || comp3)
+                        ganador=true;
+            break;
+        case "2-1": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    if(comp1 || comp2)
+                        ganador= true;
+            break;
+        case "2-2": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    if(comp1 || comp2)
+                        ganador= true;
+            break;
+        case "2-3": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    if(comp1 || comp2)
+                        ganador= true;
+            break;
+        case "3-1": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    comp3= compruebaDiagonalSecundaria(id);
+                    if(comp1 || comp2 || comp3)
+                        ganador= true;
+            break;
+        case "3-2": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    if(comp1 || comp2)
+                        ganador= true;
+            break;
+        case "3-3": comp1= compruebaFila(id);
+                    comp2= compruebaColumna(id);
+                    comp3= compruebaDiagonalPrincipal(id);
+                    if(comp1 || comp2 || comp3)
+                        ganador= true;
+            break;
     }
     
     if(!ganador) //no ha ganado nadie
         turno=!turno;
+    
+    return ganador;
   }
 
+
+/**
+ * Función que devuelve un array con las coordenadas del cuadrado pulsado
+ * @param {*} id -> id del div pulsado
+ * @returns array con las coordenadas (fila-columna)
+ */
+function coordenadasF(id){
+    return id.split("-");
+}
+
+
+
+
+/**
+ * Función que comprueba si en esa línea se hace 3 en raya
+ * @param {*} id 
+ * @returns 
+ */
+function compruebaFila(id){
+
+    let jugador= turno?'circulo':'cruz';
+
+    //Me coloco en la primera celda de esa fila
+    let coor= coordenadasF(id);
+    let fila= coor[0];
+    let sw=true;
+    let tres=0;
+    for(let i=1;i<=3 && sw;i++){
+        let img= document.getElementById(fila+"-"+i).childNodes[0];
+        if(img!=undefined){ //hay una imagen
+            let clase= img.className;
+            if(clase==jugador)
+                tres++;
+            else
+                sw=false;
+        }
+        else 
+            sw=false;
+    }
+    return tres===3;
+}
+
+/**
+ * Función que comprueba si en esa columna se hace 3 en raya
+ * @param {*} id 
+ * @returns 
+ */
+function compruebaColumna(id){
+
+    let jugador= turno?'circulo':'cruz';
+    
+    //Me coloco en la primera celda de esa col
+    let coor= coordenadasF(id);
+    let col= coor[1];
+    let sw=true;
+    let tres=0;
+    for(let i=1;i<=3 && sw;i++){
+        let img= document.getElementById(i+"-"+col).childNodes[0];
+        if(img!=undefined){ //hay una imagen
+            let clase= img.className;
+            if(clase==jugador)
+                tres++;
+            else
+                sw=false;
+        }
+        else 
+            sw=false;
+    }
+    return tres===3;
+}
+
+/**
+ * Función que comprueba si se hace línea en la diagonal principal
+ * @param {*} id 
+ * @returns 
+ */
+function compruebaDiagonalPrincipal(id){
+
+    let jugador= turno?'circulo':'cruz';
+    let sw=true;
+    let tres=0;
+    for(let i=1;i<=3 && sw;i++){
+        let img= document.getElementById(i+"-"+i).childNodes[0];
+        if(img!=undefined){
+            let clase= img.className;
+            if(clase==jugador)
+                tres++;
+            else
+                sw=false;
+        }
+        else 
+            sw=false;
+    }
+
+    return tres===3;
+}
+
+
+function compruebaDiagonalSecundaria(id){
+
+    let jugador= turno?'circulo':'cruz';
+    let sw=true;
+    let tres=0;
+    let j=3;
+    for(let i=1;i<=3 && sw;i++){
+        let img= document.getElementById(i+"-"+j).childNodes[0];
+        if(img!=undefined){
+            let clase= img.className;
+            if(clase==jugador){
+                tres++;
+                j--;
+            }
+            else
+                sw=false;
+        }
+        else 
+            sw=false;
+    }
+    return tres===3;
+}
+
+function reiniciaJugo(){
+
+    document.getElementById('btnLanzarMoneda').disabled=false;
+    document.getElementById('player1Cara').disabled=false;
+    document.getElementById('player1Cruz').disabled=false;
+    document.getElementById('player2Cara').disabled=false;
+    document.getElementById('player2Cruz').disabled=false;
+
+    document.getElementById('player1Cara').checked=false;
+    document.getElementById('player2Cara').checked=false;
+    document.getElementById('player1Cruz').checked=false;
+    document.getElementById('player2Cruz').checked=false;
+
+    let jugador= turno?'Jugador1':'Jugador2';
+    document.getElementById('ganador').innerHTML= "Ha ganado el "  + jugador;
+}
+
+/**
+ * Función que quita la fichas
+ */
+function borraFichas(){
+    let circulos= document.getElementsByClassName('circulo');
+    let cruces= document.getElementsByClassName('cruz');
+
+    while(circulos.length!=0)
+        circulos[0].remove();
+
+    while(cruces.length!=0)
+        cruces[0].remove();
+}
