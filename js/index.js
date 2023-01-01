@@ -22,11 +22,8 @@ function colocaFicha(){
         else{
             img.src='../img/cruz.png';
             img.className='cruz';
-        }
-            
-            
-        div.appendChild(img);
-        turno=!turno;
+        }            
+        div.appendChild(img);        
     }
     else{
         document.getElementById('errorLanzaMoneda').innerHTML= "Lanza la moneda para saber quien empieza";
@@ -186,6 +183,22 @@ function lanzamiento(x, solu) {
    */
   function compruebaGanar(){
 
+    let divsTablero= document.querySelectorAll('#tablero div');
 
+    let ganador=false;
+
+    if(turno){ //es turno del jugador1
+
+        
+    }
+    else if(!turno){ //es turno dle jugador2
+
+
+
+
+    }
+    
+    if(!ganador) //no ha ganado nadie
+        turno=!turno;
   }
 
