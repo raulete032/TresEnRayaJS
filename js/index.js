@@ -1,8 +1,6 @@
 
-const moneda={
-                1:'mcruz.png',
-                2:'mcara.png'
-}
+var puntosPlayer1=0;
+var puntosPlayer2=0;
 
 var jugar=false;
 //true= player1; false=player2;
@@ -27,8 +25,10 @@ function colocaFicha(){
             div.appendChild(img);            
             let fin= compruebaGanar(div);
             tituloTurno();
-            if(fin)
+            if(fin){
                 reiniciaJugo();
+            }
+                
         }
                     
     }
@@ -46,7 +46,7 @@ function colocaFicha(){
 var swMoneda=true;
 function lanzarMoneda(){
     document.getElementById('errorLanzaMoneda').innerHTML= "";
-    document.getElementById('ganador').innerHTML="";
+    // document.getElementById('turno').innerHTML="";
     let eleccion= eleccionF();
 
     if(eleccion){
@@ -377,6 +377,16 @@ function compruebaDiagonalSecundaria(id){
 
 function reiniciaJugo(){
 
+    if(turno){
+        puntosPlayer1= puntosPlayer1+1;
+        document.getElementById('puntos1').innerHTML= puntosPlayer1;
+    }
+    else{
+        puntosPlayer2= puntosPlayer2+1;
+        document.getElementById('puntos2').innerHTML= puntosPlayer2;
+    }
+        
+
     document.getElementById('btnLanzarMoneda').disabled=false;
     document.getElementById('player1Cara').disabled=false;
     document.getElementById('player1Cruz').disabled=false;
@@ -389,7 +399,7 @@ function reiniciaJugo(){
     document.getElementById('player2Cruz').checked=false;
 
     let jugador= turno?'Jugador1':'Jugador2';
-    document.getElementById('ganador').innerHTML= "Ha ganado el "  + jugador;
+    document.getElementById('turno').innerHTML= "Ha ganado el "  + jugador;
 }
 
 /**
